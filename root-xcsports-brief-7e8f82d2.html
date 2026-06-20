@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>杏彩体育 · 资料索引</title>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+            background: #f5f9fb;
+            color: #0f1c24;
+            line-height: 1.7;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 860px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 12px 30px rgba(0, 50, 60, 0.06);
+            padding: 2rem 1.8rem 4rem;
+            transition: all 0.2s;
+        }
+
+        /* 网格卡片装饰 – 蓝绿色点缀 */
+        .grid-decor {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.35;
+        }
+        .grid-decor span {
+            height: 4px;
+            border-radius: 8px;
+            background: #b7d9d4;
+        }
+        .grid-decor span:nth-child(odd) {
+            background: #7ec4bb;
+        }
+        .grid-decor span:nth-child(3n+1) {
+            background: #429e92;
+        }
+
+        .post-header {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #e2edec;
+            padding-bottom: 1.6rem;
+        }
+        .post-header h1 {
+            font-size: 2.2rem;
+            font-weight: 520;
+            letter-spacing: -0.02em;
+            color: #0a2a2f;
+            margin-bottom: 0.5rem;
+            line-height: 1.25;
+        }
+        .post-header .byline {
+            font-size: 0.9rem;
+            color: #547b7a;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .byline em {
+            font-style: normal;
+            background: #d9ede8;
+            padding: 0.1rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #16625b;
+        }
+
+        .lead {
+            font-size: 1.15rem;
+            color: #173c40;
+            background: #eaf5f2;
+            padding: 1.2rem 1.6rem;
+            border-radius: 24px;
+            margin-bottom: 2.2rem;
+            border-left: 3px solid #429e92;
+            font-weight: 380;
+        }
+
+        .content-section {
+            margin: 2.2rem 0;
+        }
+        .content-section h2 {
+            font-size: 1.5rem;
+            font-weight: 440;
+            color: #0d3c3b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .content-section h2::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #429e92;
+            border-radius: 2px;
+            margin-right: 0.3rem;
+        }
+        .content-section p {
+            margin-bottom: 1rem;
+            color: #1d3539;
+        }
+
+        /* 引用提示 */
+        .insight-block {
+            background: #f0f8f5;
+            border-radius: 28px;
+            padding: 1.6rem 2rem;
+            margin: 2rem 0 1.8rem;
+            border: 1px solid #cae0db;
+            box-shadow: 0 2px 6px rgba(66, 158, 146, 0.06);
+        }
+        .insight-block .quote-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2a7c72;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .insight-block blockquote {
+            font-size: 1.2rem;
+            font-weight: 340;
+            color: #11373b;
+            line-height: 1.6;
+            padding-left: 1rem;
+            border-left: 3px solid #429e92;
+            margin: 0.2rem 0;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0 1.8rem;
+        }
+        .card-item {
+            background: #f6fcfb;
+            border: 1px solid #cfdfdb;
+            border-radius: 20px;
+            padding: 1.2rem 1rem;
+            transition: 0.15s;
+        }
+        .card-item:hover {
+            background: #ecf6f2;
+            border-color: #429e92;
+            box-shadow: 0 4px 12px rgba(66, 158, 146, 0.08);
+        }
+        .card-item h3 {
+            font-size: 1.1rem;
+            font-weight: 460;
+            color: #0a3d3c;
+            margin-bottom: 0.3rem;
+        }
+        .card-item p {
+            font-size: 0.9rem;
+            color: #34615b;
+        }
+
+        .faq-mini {
+            background: #ffffff;
+            border: 1px solid #daeae5;
+            border-radius: 24px;
+            padding: 1.2rem 1.6rem;
+            margin: 2.8rem 0 1.6rem;
+        }
+        .faq-mini details {
+            margin: 0.6rem 0;
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed #bdd5cf;
+        }
+        .faq-mini details:last-of-type {
+            border-bottom: none;
+        }
+        .faq-mini summary {
+            font-weight: 450;
+            color: #0f3a3a;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .faq-mini summary::before {
+            content: "▸";
+            color: #429e92;
+            font-size: 1.1rem;
+            transition: 0.2s;
+        }
+        .faq-mini details[open] summary::before {
+            content: "▾";
+        }
+        .faq-mini details p {
+            margin-top: 0.6rem;
+            padding-left: 1.5rem;
+            color: #2e5a56;
+            font-size: 0.95rem;
+        }
+
+        .visit-line {
+            margin: 2.8rem 0 1rem;
+            padding: 1.2rem 1.6rem;
+            background: #e3f1ed;
+            border-radius: 40px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #0b3538;
+        }
+        .visit-line a {
+            color: #1b6e63;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #429e92;
+            padding-bottom: 1px;
+            transition: 0.15s;
+        }
+        .visit-line a:hover {
+            background: #429e92;
+            color: white;
+            border-bottom-color: transparent;
+            padding: 0.1rem 0.2rem;
+            border-radius: 6px;
+        }
+
+        .footnote {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #759490;
+            margin-top: 3.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #d8e7e2;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 0.8rem; }
+            .page { padding: 1.5rem 1rem; }
+            .post-header h1 { font-size: 1.6rem; }
+            .lead { font-size: 1rem; padding: 1rem; }
+            .insight-block { padding: 1.2rem; }
+            .card-grid { grid-template-columns: 1fr; }
+            .visit-line { font-size: 1rem; padding: 0.8rem 1rem; }
+            .grid-decor { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 400px) {
+            .post-header h1 { font-size: 1.35rem; }
+            .faq-mini { padding: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <!-- 网格卡片装饰 -->
+        <div class="grid-decor" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+
+        <header class="post-header">
+            <h1>杏彩体育 · 一份资料侧的整理笔记</h1>
+            <div class="byline">
+                <span>2025 · 内容索引</span>
+                <em>信息梳理</em>
+                <span>基于公开素材</span>
+            </div>
+        </header>
+
+        <div class="lead">
+            从资料整理的角度去看一个体育资讯站，许多细节都藏在页面的结构与索引方式里。比起结论，我更倾向于记录观察到的线索。
+        </div>
+
+        <!-- 正文段落 自然叙述 -->
+        <div class="content-section">
+            <h2>站点骨架与浏览逻辑</h2>
+            <p>打开 <a href="https://root-xcsports.com">杏彩体育</a> 的首页，首先注意到的是清晰的栏目分区和导航层级。顶部菜单将不同运动项目归类，右侧辅以热门动态，这种布局降低了查找成本。从信息架构的角度来看，它类似一个分类索引库，而非简单的新闻滚动页。</p>
+            <p>值得留意的是，每个比赛条目都附带简短的赛况摘要和数据段，但没有过度堆砌。排版留白均匀，标题层级明显，适合快速扫读。对于常看体育数据的人，这种克制的信息密度反而更友好。</p>
+        </div>
+
+        <div class="content-section">
+            <h2>资料索引的几个特点</h2>
+            <p>我花了一点时间梳理它的页面结构，发现几个重复出现的模式：</p>
+            <div class="card-grid">
+                <div class="card-item">
+                    <h3>分类标签</h3>
+                    <p>足球、篮球、网球等主标签之下还有次级筛选，像一个小型元数据系统。</p>
+                </div>
+                <div class="card-item">
+                    <h3>时间线排列</h3>
+                    <p>赛事列表按日期倒序，最新场次在最前，这与大多数资料库的排序逻辑一致。</p>
+                </div>
+                <div class="card-item">
+                    <h3>摘要卡片</h3>
+                    <p>每个条目都是独立的卡片，包含比分或状态、时间、联赛名称，信息单元完整。</p>
+                </div>
+                <div class="card-item">
+                    <h3>静态链接</h3>
+                    <p>大部分跳转指向具体赛事页，路径构成有规律，便于人工索引和整理。</p>
+                </div>
+            </div>
+            <p>这些特点让 <a href="https://root-xcsports.com">杏彩体育</a> 更像一个以资料整理为导向的体育信息节点，而非单纯的新闻门户。</p>
+        </div>
+
+        <!-- 引用提示 带点叙述感 -->
+        <div class="insight-block">
+            <div class="quote-label">▎阅读摘录</div>
+            <blockquote>
+                体育信息索引的本质不是堆砌数据，而是提供一种能让人按图索骥的结构。多看几眼分类方式，往往比刷十条动态更有用。
+            </blockquote>
+        </div>
+
+        <div class="content-section">
+            <h2>场景：当你想查某场比赛的记录</h2>
+            <p>假设你关注的是欧冠某一场小组赛，但又忘了具体日期。在 <a href="https://root-xcsports.com">杏彩体育</a> 上，可以直接按赛事标签筛选，再根据时间范围缩小结果。所有卡片都显示主客队、比分和赛事阶段，基本不需要二次点击就能确认目标。这种「一眼匹配」的设计，非常符合资料索引的习惯。</p>
+            <p>我注意到每张卡片内的数据字段顺序大致固定，这种一致性会降低认知负担。如果你的整理习惯是批量复制赛果，这种有序的排列能省去很多重新排版的时间。</p>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-mini">
+            <details>
+                <summary>这个站适合做什么类型的资料整理？</summary>
+                <p>适合赛事结果归档、联赛数据对比、球队近期状态追踪。因为它的结构偏静态索引，用表格或文档配合卡片内容会很顺手。</p>
+            </details>
+            <details>
+                <summary>页面信息更新频率怎么样？</summary>
+                <p>从首页的时间标记来看，更新比较规律，大联赛的赛后数据通常在几小时内就能检索到。具体频率可自行留意。</p>
+            </details>
+            <details>
+                <summary>移动端浏览体验如何？</summary>
+                <p>适配做得不错，卡片在小屏上依然保持间距，筛选菜单折叠后不占地方。从索引的角度，手机端查阅反而更聚焦。</p>
+            </details>
+        </div>
+
+        <!-- 访问句 自然嵌入链接 -->
+        <div class="visit-line">
+            如果你也在整理体育赛事资料，可以到 <a href="https://root-xcsports.com">杏彩体育</a> 看看它的分类与卡片结构，或许能发现一些有用的索引思路。
+        </div>
+
+        <div class="footnote">
+            索引笔记 · 基于页面公开内容整理 · 无诱导信息
+        </div>
+
+    </div>
+</body>
+</html>
