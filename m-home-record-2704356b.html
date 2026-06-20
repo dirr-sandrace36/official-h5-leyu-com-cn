@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>威廉希尔 · 知识库与信息索引页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fbe9d7 0%, #f2d5b6 50%, #ecc6a1 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.2rem;
+        }
+
+        .page-wrapper {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* 主卡片容器 */
+        .knowledge-card {
+            background: #fffdfa;
+            border-radius: 48px 48px 32px 32px;
+            box-shadow: 0 20px 40px -12px rgba(180, 110, 50, 0.25), 0 8px 20px rgba(255, 235, 210, 0.5);
+            padding: 2.8rem 2.5rem;
+            transition: all 0.2s ease;
+        }
+
+        @media (max-width: 600px) {
+            .knowledge-card {
+                padding: 2rem 1.2rem;
+                border-radius: 32px 32px 24px 24px;
+            }
+        }
+
+        /* 头部标识 + 目录感布局 */
+        .header-area {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 2px dashed #e6d3be;
+            padding-bottom: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .site-marker {
+            font-size: 1.1rem;
+            font-weight: 450;
+            color: #9a7c64;
+            letter-spacing: 0.02em;
+            background: #f6ede4;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+        }
+
+        .hero-tagline {
+            font-size: 0.95rem;
+            color: #8f755f;
+            background: transparent;
+            padding: 0.2rem 0.6rem;
+            border: 1px solid #dcc9b9;
+            border-radius: 40px;
+        }
+
+        /* 主标题 */
+        .main-title {
+            font-weight: 550;
+            font-size: 2.2rem;
+            letter-spacing: 0.01em;
+            color: #4d3427;
+            margin-bottom: 0.25rem;
+        }
+
+        .main-title small {
+            font-size: 1rem;
+            font-weight: 350;
+            color: #927b69;
+            margin-left: 0.5rem;
+        }
+
+        /* 目录格网 — 类似知识库入口卡片 */
+        .entry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.4rem;
+            margin: 2rem 0 1.8rem;
+        }
+
+        .entry-item {
+            background: #fcf6ef;
+            border-radius: 20px;
+            padding: 1.25rem 1rem 1.1rem;
+            box-shadow: 0 2px 6px rgba(160, 120, 90, 0.08);
+            transition: 0.2s;
+            border-left: 4px solid #d9b79b;
+        }
+
+        .entry-item:hover {
+            background: #fefbf8;
+            box-shadow: 0 8px 18px rgba(150, 100, 65, 0.12);
+            transform: translateY(-2px);
+            border-left-color: #b6896a;
+        }
+
+        .entry-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #b5947c;
+            margin-bottom: 0.25rem;
+        }
+
+        .entry-item .heading {
+            font-weight: 520;
+            font-size: 1.2rem;
+            color: #4d3427;
+            margin-bottom: 0.3rem;
+        }
+
+        .entry-item .summary {
+            font-size: 0.9rem;
+            color: #6f5846;
+            line-height: 1.5;
+        }
+
+        .entry-item .summary a {
+            color: #926d52;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #c9ad98;
+            transition: 0.15s;
+        }
+
+        .entry-item .summary a:hover {
+            color: #5c3f2e;
+            border-bottom-style: solid;
+        }
+
+        /* 说明区 — 清晰平实 */
+        .explanation-zone {
+            background: #fbf4ec;
+            border-radius: 28px;
+            padding: 1.8rem 1.8rem 2rem;
+            margin: 1.8rem 0 2rem;
+        }
+
+        .explanation-zone h3 {
+            font-weight: 520;
+            font-size: 1.3rem;
+            color: #503a2b;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .explanation-zone p {
+            color: #3f2e22;
+            line-height: 1.7;
+            font-size: 0.98rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .explanation-zone p:last-child {
+            margin-bottom: 0;
+        }
+
+        .inline-link {
+            color: #7a5a44;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid #dcc0af;
+            transition: 0.15s;
+        }
+
+        .inline-link:hover {
+            color: #3d2b1f;
+            border-bottom: 1px solid #936f57;
+        }
+
+        /* 提示区 */
+        .tip-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 2rem 0 1.6rem;
+            align-items: stretch;
+        }
+
+        .tip-card {
+            flex: 1 1 180px;
+            background: #f6ede5;
+            border-radius: 24px;
+            padding: 1.2rem 1.2rem 1.4rem;
+            border: 1px solid #ead9cc;
+        }
+
+        .tip-card .emoji-badge {
+            font-size: 1.4rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .tip-card h4 {
+            font-weight: 500;
+            font-size: 1rem;
+            color: #4d3427;
+            margin: 0.25rem 0 0.4rem;
+        }
+
+        .tip-card p {
+            font-size: 0.9rem;
+            color: #5f493b;
+            line-height: 1.5;
+        }
+
+        /* FAQ 摘要 / 相关信息区 */
+        .related-faq {
+            background: #faf3eb;
+            border-radius: 28px;
+            padding: 1.6rem 1.8rem 1.8rem;
+            margin: 2rem 0 1.2rem;
+        }
+
+        .related-faq h3 {
+            font-weight: 520;
+            font-size: 1.2rem;
+            color: #4d3427;
+            margin-bottom: 1rem;
+            border-left: 4px solid #ccaa91;
+            padding-left: 0.85rem;
+        }
+
+        .faq-mini-item {
+            display: flex;
+            gap: 1.2rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #e4d6ca;
+        }
+
+        .faq-mini-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            min-width: 80px;
+            color: #735a48;
+        }
+
+        .faq-a {
+            color: #3f2e22;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .faq-a a {
+            color: #7a5a44;
+            text-decoration: none;
+            border-bottom: 1px dotted #c9ad98;
+        }
+
+        .faq-a a:hover {
+            border-bottom-style: solid;
+            color: #3d2b1f;
+        }
+
+        /* 底部脚注 */
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #8b7564;
+            border-top: 1px solid #e5d4c6;
+            padding-top: 1.8rem;
+        }
+
+        .footer-note a {
+            color: #7a5a44;
+            text-decoration: none;
+            font-weight: 450;
+        }
+
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
+
+        .badge-mini {
+            display: inline-block;
+            background: #ebdbce;
+            padding: 0.15rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            color: #5c4234;
+            letter-spacing: 0.02em;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 620px) {
+            .main-title {
+                font-size: 1.7rem;
+            }
+            .header-area {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .entry-grid {
+                grid-template-columns: 1fr;
+            }
+            .faq-mini-item {
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="knowledge-card">
+
+        <!-- 头部：标识 + 目录感 -->
+        <div class="header-area">
+            <span class="site-marker">📚 知识索引 · 信息参考</span>
+            <span class="hero-tagline">日常查询 · 对照 · 延伸阅读</span>
+        </div>
+
+        <div class="main-title">
+            威廉希尔 <small>基础信息与常见引用</small>
+        </div>
+
+        <!-- 目录格网：四个入口卡片 -->
+        <div class="entry-grid">
+            <div class="entry-item">
+                <div class="label">📋 基本档案</div>
+                <div class="heading">背景·定位</div>
+                <div class="summary">业界熟悉的品牌之一，在体育、娱乐及资讯领域拥有长期积累。常作为用户参考与对照的节点。</div>
+            </div>
+            <div class="entry-item">
+                <div class="label">🔍 查询场景</div>
+                <div class="heading">每日对照</div>
+                <div class="summary">许多用户在浏览数据或信息时，会同步调出<a href="https://m-home-williamhill.com">威廉希尔</a>的相关内容作为参照基准，用以对比和核实。</div>
+            </div>
+            <div class="entry-item">
+                <div class="label">📎 关联说明</div>
+                <div class="heading">延伸线索</div>
+                <div class="summary">围绕品牌名称展开的常见词条、历史沿革及服务范围整理，适合快速浏览与背景调查。</div>
+            </div>
+            <div class="entry-item">
+                <div class="label">🧩 常见指代</div>
+                <div class="heading">名称与用法</div>
+                <div class="summary">在口语和书面中，“威廉希尔”也常作为一类信息聚合的代称，出现在各类整理文档与用户笔记中。</div>
+            </div>
+        </div>
+
+        <!-- 说明区：从日常使用角度展开 -->
+        <div class="explanation-zone">
+            <h3>📖 说明 · 日常查询与对照</h3>
+            <p>本页从信息索引的角度整理与“威廉希尔”相关的知识条目。在日常查询、数据对照或背景延伸阅读时，用户常需要一份简洁有序的参考资料，以便快速定位核心事实，减少重复搜索的时间。</p>
+            <p>威廉希尔（William Hill）这一名称在中文语境下经常出现在体育资讯、数据统计以及娱乐产业的讨论中。对于需要反复比照同一信息来源的使用者而言，将相关要点集中呈现，有助于形成稳定的知识锚点。例如，在分析赛事数据或行业动态时，许多人习惯将<a href="https://m-home-williamhill.com" class="inline-link">威廉希尔</a>作为参照基线，再结合其他资料进行综合判断。</p>
+            <p>需要说明的是，本页仅作为信息汇总与索引使用，不构成任何专业建议或立场。所有内容均基于公开可查的通用知识进行整理，用户如需更详尽或最新的资料，建议直接访问官方网站或查阅权威出处。</p>
+        </div>
+
+        <!-- 提示区 -->
+        <div class="tip-area">
+            <div class="tip-card">
+                <div class="emoji-badge">💡</div>
+                <h4>使用提示</h4>
+                <p>将威廉希尔作为信息对照点时，建议同时参考多个独立来源，以确保结论的均衡与客观。</p>
+            </div>
+            <div class="tip-card">
+                <div class="emoji-badge">📌</div>
+                <h4>引用备注</h4>
+                <p>在笔记或文档中引用本页内容时，建议注明出处，并核对原始数据以保证准确性。</p>
+            </div>
+            <div class="tip-card">
+                <div class="emoji-badge">🔄</div>
+                <h4>定期更新</h4>
+                <p>知识库类页面会随信息环境调整，建议每隔一段时间重新浏览，以获取最新条目与说明。</p>
+            </div>
+        </div>
+
+        <!-- 相关信息区 / FAQ 摘要 -->
+        <div class="related-faq">
+            <h3>❓ 常见查询摘要</h3>
+
+            <div class="faq-mini-item">
+                <span class="faq-q">威廉希尔主要出现在哪些场景？</span>
+                <span class="faq-a">体育数据资讯、行业对比分析、用户讨论帖以及信息聚合网站中均常出现该名称。许多资料将其作为一个参照坐标。</span>
+            </div>
+            <div class="faq-mini-item">
+                <span class="faq-q">如何快速找到官方信息？</span>
+                <span class="faq-a">如需获取第一手信息，可访问<a href="https://m-home-williamhill.com">威廉希尔</a>相关页面，注意核对域名与官方标识，避免信息误差。</span>
+            </div>
+            <div class="faq-mini-item">
+                <span class="faq-q">本页与官方的关系？</span>
+                <span class="faq-a">本页为独立整理的知识索引页，与官方无直接隶属关系，内容仅作日常参考与对照使用，不替代原始来源。</span>
+            </div>
+            <div class="faq-mini-item">
+                <span class="faq-q">延伸阅读建议</span>
+                <span class="faq-a">推荐同时查阅行业术语表、历史发展时间线及相关数据手册，以便构建更全面的认知框架。</span>
+            </div>
+        </div>
+
+        <!-- 底部 -->
+        <div class="footer-note">
+            <span class="badge-mini">知识库入口 · 说明版</span> &nbsp;|&nbsp; 内容仅供日常查询与对照 &nbsp;|&nbsp; 参考链接：<a href="https://m-home-williamhill.com">威廉希尔</a>
+            <br><span style="opacity: 0.6; font-size: 0.75rem; display: inline-block; margin-top: 0.5rem;">索引编号 7d3 · 信息整理于通用公开资料</span>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
