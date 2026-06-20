@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>星空体育 · 日常查询与对照指南</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f1f7f9;
+      color: #1a2b34;
+      line-height: 1.6;
+      padding: 1.5rem 1rem 3rem;
+    }
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    /* 网格卡片容器 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (min-width: 580px) {
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 880px) {
+      .card-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 4px 12px rgba(0, 50, 40, 0.06);
+      border: 1px solid #dae9ed;
+      transition: box-shadow 0.2s ease, transform 0.15s;
+    }
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(0, 100, 90, 0.08);
+      transform: translateY(-2px);
+    }
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #116466;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .card h3::before {
+      content: "◆";
+      font-size: 0.85rem;
+      color: #2c9a9c;
+      opacity: 0.7;
+    }
+    .card p, .card li {
+      font-size: 0.95rem;
+      color: #2d4048;
+    }
+    .card ul {
+      padding-left: 1.2rem;
+      margin-top: 0.3rem;
+    }
+    .card li {
+      margin-bottom: 0.3rem;
+    }
+
+    /* hero 区块 */
+    .hero {
+      background: linear-gradient(145deg, #e3f0f2, #ccdfe3);
+      border-radius: 28px;
+      padding: 2.2rem 1.8rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid #b7d2d8;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #0a3d3f;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #0d6b6d, #1f8f8c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: #1f444b;
+      max-width: 700px;
+      margin-bottom: 0.4rem;
+    }
+    .hero .tagline {
+      display: inline-block;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(2px);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      color: #0b5659;
+      border: 1px solid #b6d5d9;
+      margin-top: 0.6rem;
+    }
+
+    /* 两栏场景区 */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    @media (min-width: 640px) {
+      .two-column { grid-template-columns: 1.2fr 0.8fr; }
+    }
+    .scene-box {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.6rem 1.5rem;
+      border: 1px solid #d2e4e7;
+      box-shadow: 0 2px 6px rgba(0, 60, 55, 0.04);
+    }
+    .scene-box h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #116466;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .scene-box h2::before {
+      content: "◎";
+      color: #2c9a9c;
+      font-size: 1.1rem;
+    }
+    .scene-box p, .scene-box li {
+      font-size: 0.95rem;
+      color: #2d4048;
+    }
+    .scene-box ul {
+      padding-left: 1.2rem;
+      margin-top: 0.4rem;
+    }
+
+    /* 链接样式 */
+    a {
+      color: #096b6d;
+      text-decoration: none;
+      border-bottom: 1px dotted #8fc3c5;
+      transition: border-color 0.15s, color 0.15s;
+      font-weight: 500;
+    }
+    a:hover {
+      color: #044142;
+      border-bottom: 1px solid #044142;
+    }
+
+    /* FAQ 摘要 */
+    .faq-mini {
+      background: #daeff0;
+      border-radius: 22px;
+      padding: 1.6rem 1.6rem 1.4rem;
+      margin: 2rem 0 1.2rem;
+      border: 1px solid #bdd7db;
+    }
+    .faq-mini h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0e5c5e;
+      margin-bottom: 0.9rem;
+    }
+    .faq-item {
+      margin-bottom: 0.7rem;
+    }
+    .faq-q {
+      font-weight: 600;
+      color: #1b5356;
+      font-size: 0.95rem;
+    }
+    .faq-a {
+      color: #2f4b50;
+      font-size: 0.9rem;
+      margin-top: 0.1rem;
+      padding-left: 0.3rem;
+    }
+
+    .footnote {
+      font-size: 0.85rem;
+      color: #537177;
+      border-top: 1px solid #c7dbdf;
+      padding-top: 1.5rem;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+    .footnote a {
+      font-weight: 400;
+    }
+
+    /* 移动端小调整 */
+    @media (max-width: 480px) {
+      .hero { padding: 1.6rem 1.2rem; }
+      .hero h1 { font-size: 1.6rem; }
+      .card { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- hero -->
+  <div class="hero">
+    <h1><span>星空体育</span> · 日常查询与对照</h1>
+    <p>一个面向信息对照、趋势观察与延伸阅读的轻量内容平台。适合在浏览资讯或整理笔记时，作为交叉验证和背景补充的参考来源。</p>
+    <div class="tagline">从查询到理解 · 温和而持续</div>
+  </div>
+
+  <!-- 卡片网格：亮点摘要 -->
+  <div class="card-grid">
+    <div class="card">
+      <h3>多维度对照</h3>
+      <p>覆盖赛事动态、数据简讯与专题梳理，方便你在日常信息流中快速定位关键变化，并与手头资料进行比对。</p>
+    </div>
+    <div class="card">
+      <h3>内容组织方式</h3>
+      <p>每期内容以短篇摘要或主题清单呈现，结构清晰、克制篇幅。适合利用碎片时间阅读，也便于后续延伸查阅。</p>
+    </div>
+    <div class="card">
+      <h3>延伸阅读索引</h3>
+      <p>部分文章末尾附带参考链接或背景说明，辅助你进一步探索感兴趣的话题，形成自己的理解路径。</p>
+    </div>
+    <div class="card">
+      <h3>移动端友好</h3>
+      <p>页面布局适配手机与平板，字号、间距经过优化，阅读时不需要频繁放大或滑动。无论通勤或午休，都可以轻松打开。</p>
+    </div>
+    <div class="card">
+      <h3>低干扰界面</h3>
+      <p>没有弹窗、浮层或自动播放内容。信息直接呈现，你可以按自己的节奏翻阅和思考。</p>
+    </div>
+    <div class="card">
+      <h3>定期更新</h3>
+      <p>内容保持适度更新频率，避免信息过载。每个版本都会根据反馈微调结构与表达方式。</p>
+    </div>
+  </div>
+
+  <!-- 两栏：使用场景 + 提示 -->
+  <div class="two-column">
+    <div class="scene-box">
+      <h2>常见使用场景</h2>
+      <ul>
+        <li><strong>日常查询</strong> — 在阅读新闻或社交动态后，来 <a href="https://cnsite--xingkong.com">星空体育</a> 快速对照核心事实或数据摘要。</li>
+        <li><strong>笔记整理</strong> — 将页面中的清单、时间线或分类信息作为框架参考，辅助构建个人知识卡片。</li>
+        <li><strong>延伸阅读</strong> — 通过文末的参考链接或相关主题入口，拓宽信息边界，发现新的关注点。</li>
+        <li><strong>轻量回顾</strong> — 每隔一段时间回看历史专题，感知趋势变化，沉淀自己的判断。</li>
+      </ul>
+    </div>
+    <div class="scene-box">
+      <h2>使用建议</h2>
+      <p>建议将本页面作为信息对照的其中一环，而非唯一来源。遇到重要数据或结论时，可多方核实。</p>
+      <p style="margin-top:0.7rem;">如果你习惯用浏览器书签或笔记工具收藏页面，可以直接将 <a href="https://cnsite--xingkong.com">星空体育</a> 加入常用列表，方便随时调阅。</p>
+      <p style="margin-top:0.7rem;">页面内容不构成专业建议或决策依据，请结合自身判断合理使用。</p>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-mini">
+    <h3>你可能想了解的</h3>
+    <div class="faq-item">
+      <div class="faq-q">内容更新频率是怎样的？</div>
+      <div class="faq-a">目前保持每周 1–2 次更新，专题类内容不定期发布。你可以通过收藏页面或定期回访获取最新内容。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">页面上的链接会跳转到外部吗？</div>
+      <div class="faq-a">部分延伸阅读会附带外部参考链接，均以标注形式呈现。你可以自行决定是否跳转。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">我可以在自己的笔记里引用这里的内容吗？</div>
+      <div class="faq-a">可以。引用时建议注明来源，并保持信息原意。若涉及具体数据，建议二次核对。</div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footnote">
+    内容仅供个人参考与对照 · 不构成任何形式的引导或承诺<br>
+    如需进一步了解，可访问 <a href="https://cnsite--xingkong.com">星空体育</a> 浏览完整页面
+  </div>
+
+</div>
+</body>
+</html>
